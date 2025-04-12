@@ -1,3 +1,4 @@
+# Bash script for the number guessing game project
 #!/bin/bash
 
 # PSQL variable for querying the database
