@@ -27,7 +27,7 @@ secret_number=$((RANDOM % 1000 + 1))
 guess_count=0
 
 # Ask the user to guess the number
-echo "Guess the secret number between 1 and 1000:"
+echo -e "\nGuess the secret number between 1 and 1000:"
 
 while true; do
   read guess
