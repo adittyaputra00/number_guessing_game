@@ -18,7 +18,8 @@ if [[ -z $USER_DATA ]]; then
   BEST_GAME=0
 else
   # Returning user
-  IFS='|' read GAMES_PLAYED BEST_GAME <<< "$USER_DATA"
+  GAMES_PLAYED=$(echo $USER_DATA | cut -d'|' -f1)
+  BEST_GAME=$(echo $USER_DATA | cut -d'|' -f2)
   echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 fi
 
@@ -48,7 +49,7 @@ while read GUESS; do
   else
     # Correct guess
     echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
-
+    
     # Update database
     if [[ $BEST_GAME -eq 0 || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]; then
       $PSQL "UPDATE users SET games_played = games_played + 1, best_game = $NUMBER_OF_GUESSES WHERE username = '$USERNAME';"
